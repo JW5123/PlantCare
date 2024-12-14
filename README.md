@@ -1,4 +1,4 @@
-# OrchidCare
+# PlantCare
 
 ### 專案名稱 : 植物健康辨系統
 ### 功能需求
