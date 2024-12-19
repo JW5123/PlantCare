@@ -12,12 +12,11 @@ function previewImage(event) {
     }
 }
 
-// 開始預測前檢查圖片是否選擇
 function startPrediction() {
     const imageInput = document.getElementById('image');
     if (!imageInput.files.length) {
         alert('請上傳圖片後再進行檢測');
     } else {
-        document.getElementById('upload-form').submit(); // 提交表單以進行預測
+        document.getElementById('upload-form').submit();
     }
 }

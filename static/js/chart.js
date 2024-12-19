@@ -1,9 +1,7 @@
 window.onload = function() {
-    // 從後端傳遞的數據
     const rawProbabilities = document.getElementById('result-box').getAttribute('data-probabilities');
     const probabilities = rawProbabilities ? JSON.parse(rawProbabilities) : [0, 0, 0, 0, 0, 0];
 
-    // 預設的病症標籤
     const labels = ['健康', '黃葉片', '軟腐病', '炭疽病', '白粉病', '葉燒症'];
 
     // 使用 Chart.js 繪製直方圖
@@ -56,7 +54,7 @@ window.onload = function() {
                         size: 14
                     },
                     formatter: function(value) {
-                        return value.toFixed(2) + '%'; // 顯示百分比，保留小數點後兩位
+                        return value.toFixed(2) + '%';
                     }
                 }
             }
