@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlantCare - 植物健康狀態檢測</title>
+    <title>PlantCare - 植物健康狀態預測</title>
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 </head>
 <body>
+    <!-- 導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">PlantCare</a>
         </div>
     </nav>
-    
+
+    <!-- 預測功能 -->
     <div class="container mt-5">
         <h1 class="text-center mb-4">PlantCare - 植物健康檢測</h1>
         <div class="row justify-content-center mb-5">
@@ -61,7 +64,7 @@
                             <!-- 1. 顯示查看病症資訊按鈕 -->
                             {% if predicted_class != '健康' %}
                             <div class="mt-4">
-                                <button class="btn btn-primary" id="get-disease-info-btn" data-disease-name="{{ predicted_class }}">查看病症資訊</button>
+                                <button class="btn btn-primary" id="get-disease-info-btn">查看病症資訊</button>
                             </div>
                             <div id="loading-indicator" style="display:none;" class="mt-2">
                                 <p>正在搜尋病症資訊...</p>
@@ -74,9 +77,8 @@
                             <!-- 2. 病症資訊區 -->
                             <div class="mt-4" id="disease-info">
                                 {% if predicted_class == '健康' %}
-                                    <p>植物狀態大致健康！</p>
+                                    <p>檢測結果顯示植物健康狀態良好！</p>
                                 {% endif %}
-                                <!-- 此處留空，通過 AJAX 實時更新病症資訊 -->
                             </div>
                         </div>
                     </div>
@@ -89,13 +91,17 @@
         document.addEventListener("DOMContentLoaded", function () {
             const getDiseaseInfoBtn = document.getElementById("get-disease-info-btn");
             const loadingIndicator = document.getElementById("loading-indicator");
-            const diseaseInfoDiv = document.getElementById("disease_info");
+            const diseaseInfoDiv = document.getElementById("disease-info");
 
             if (getDiseaseInfoBtn) {
                 getDiseaseInfoBtn.addEventListener("click", function () {
+                    // 顯示加載指示器
                     loadingIndicator.style.display = "block";
+
+                    // 取得病症名稱
                     const diseaseName = "{{ predicted_class }}";
 
+                    // 發送 AJAX 請求到後端
                     fetch("/get_disease_info", {
                         method: "POST",
                         headers: {
@@ -105,6 +111,7 @@
                     })
                     .then((response) => response.json())
                     .then((data) => {
+                        // 更新病症資訊
                         loadingIndicator.style.display = "none";
                         if (data.disease_info) {
                             diseaseInfoDiv.innerHTML = `
@@ -112,7 +119,9 @@
                                 <div class="border p-3 rounded bg-light">${data.disease_info}</div>
                             `;
                         } else {
-                            diseaseInfoDiv.innerHTML = `<p>無法取得病症資訊，請稍後再試。</p>`;
+                            diseaseInfoDiv.innerHTML = `
+                                <p>無法取得病症資訊，請稍後再試。</p>
+                            `;
                         }
                     })
                     .catch((error) => {
