@@ -1,6 +1,0 @@
-.gitignore
-.venv
-.env
-static/uploads
-database
-__pycache__
