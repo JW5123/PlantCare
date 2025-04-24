@@ -51,7 +51,7 @@ def get_disease_info(disease_name):
     請用繁體中文回答。
     """
     try:
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         response = model.generate_content(prompt)
 
         result = response.text.strip() if response.text else "無法取得病症資訊，請稍後再試。"
