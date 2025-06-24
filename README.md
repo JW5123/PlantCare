@@ -4,7 +4,7 @@
 ### 功能
 1. 健康狀態判斷
 2. 健康狀態統計圖
-3. 結合 Gemini API 可顯示病症
+3. 結合 Gemini API 可顯示病症及照護建議
 
 ### 使用技術
 1. Teachable Machine (train model)
