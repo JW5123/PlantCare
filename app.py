@@ -65,7 +65,7 @@ def get_disease_info(disease_name):
         return "<p>無法取得病症資訊，請稍後再試。</p>"
 
 
-# 路由：首頁
+# 首頁
 @app.route('/', methods=['GET', 'POST'])
 def index():
     image_src = None
@@ -94,7 +94,7 @@ def index():
                            all_probabilities=all_probabilities_list,
                            disease_info=disease_info)
 
-# 路由：獲取病症資訊
+# 獲取病症資訊
 @app.route('/get_disease_info', methods=['POST'])
 def get_disease_info_route():
     data = request.get_json()
