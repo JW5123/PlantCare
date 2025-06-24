@@ -9,5 +9,5 @@
 5. 結合 Gemini API 可顯示病症
 
 ### 使用技術
-1. teachable (train model)
-2. python flask
+1. Teachable Machine (train model)
+2. Python Flask
